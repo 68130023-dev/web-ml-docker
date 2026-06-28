@@ -1,0 +1,4 @@
+web/model.pkl
+__pycache__/
+*.pyc
+.vscode/

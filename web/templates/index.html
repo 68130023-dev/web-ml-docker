@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Iris Classifier (Web-ML)</title>
+  <style>
+    body { font-family: sans-serif; max-width: 640px; margin: 40px auto; }
+    input { width: 100%; padding: 8px; margin: 4px 0 12px; }
+    button { padding: 10px 20px; cursor: pointer; }
+    .result { background: #e8f5e9; padding: 12px; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    td, th { border: 1px solid #ddd; padding: 6px; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>ทำนายชนิดดอก Iris</h1>
+  <form method="POST">
+    <label>Sepal length</label>
+    <input name="sepal_length" type="number" step="0.1" value="5.1" required>
+    <label>Sepal width</label>
+    <input name="sepal_width" type="number" step="0.1" value="3.5" required>
+    <label>Petal length</label>
+    <input name="petal_length" type="number" step="0.1" value="1.4" required>
+    <label>Petal width</label>
+    <input name="petal_width" type="number" step="0.1" value="0.2" required>
+    <button type="submit">ทำนาย</button>
+  </form>
+
+  {% if result %}
+    <p class="result">ผลทำนาย: <b>{{ result }}</b></p>
+  {% endif %}
+
+  <h2>ประวัติการทำนายล่าสุด</h2>
+  <table>
+    <tr><th>SL</th><th>SW</th><th>PL</th><th>PW</th><th>ผล</th><th>เวลา</th></tr>
+    {% for row in history %}
+      <tr>
+        <td>{{ row[0] }}</td><td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td><td>{{ row[3] }}</td>
+        <td>{{ row[4] }}</td><td>{{ row[5] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
