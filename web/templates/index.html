@@ -16,20 +16,18 @@
   <h1>ทำนายชนิดดอก Iris</h1>
   <form method="POST">
     <label>Sepal length</label>
-    <input name="sepal_length" type="number" step="0.1" value="5.1" required>
+    <input name="sepal_length" type="number" step="0.1" value="{{ form_values.sepal_length }}" required>
     <label>Sepal width</label>
-    <input name="sepal_width" type="number" step="0.1" value="3.5" required>
+    <input name="sepal_width" type="number" step="0.1" value="{{ form_values.sepal_width }}" required>
     <label>Petal length</label>
-    <input name="petal_length" type="number" step="0.1" value="1.4" required>
+    <input name="petal_length" type="number" step="0.1" value="{{ form_values.petal_length }}" required>
     <label>Petal width</label>
-    <input name="petal_width" type="number" step="0.1" value="0.2" required>
+    <input name="petal_width" type="number" step="0.1" value="{{ form_values.petal_width }}" required>
     <button type="submit">ทำนาย</button>
   </form>
-
   {% if result %}
     <p class="result">ผลทำนาย: <b>{{ result }}</b></p>
   {% endif %}
-
   <h2>ประวัติการทำนายล่าสุด</h2>
   <table>
     <tr><th>SL</th><th>SW</th><th>PL</th><th>PW</th><th>ผล</th><th>เวลา</th></tr>
