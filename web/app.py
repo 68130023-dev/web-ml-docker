@@ -46,12 +46,25 @@ def init_db(retries=10):
 @app.route("/", methods=["GET", "POST"])
 def index():
     result = None
+    form_values = {
+        "sepal_length": 5.1,
+        "sepal_width": 3.5,
+        "petal_length": 1.4,
+        "petal_width": 0.2,
+    }
+
     if request.method == "POST":
+        form_values = {
+            "sepal_length": float(request.form["sepal_length"]),
+            "sepal_width": float(request.form["sepal_width"]),
+            "petal_length": float(request.form["petal_length"]),
+            "petal_width": float(request.form["petal_width"]),
+        }
         features = [
-            float(request.form["sepal_length"]),
-            float(request.form["sepal_width"]),
-            float(request.form["petal_length"]),
-            float(request.form["petal_width"]),
+            form_values["sepal_length"],
+            form_values["sepal_width"],
+            form_values["petal_length"],
+            form_values["petal_width"],
         ]
         pred = int(model.predict([features])[0])
         result = CLASSES[pred]
@@ -78,7 +91,9 @@ def index():
     cur.close()
     conn.close()
 
-    return render_template("index.html", result=result, history=history)
+    return render_template(
+        "index.html", result=result, history=history, form_values=form_values
+    )
 
 
 if __name__ == "__main__":
